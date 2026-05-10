@@ -1,658 +1,1287 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI71 — Coding Round Prep</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #080b10;
-  --surface: #0d1117;
-  --surface2: #131920;
-  --border: #1c2a38;
-  --border2: #243344;
-  --text: #d4e0ed;
-  --muted: #4d6478;
-  --accent: #00d4ff;
-  --accent2: #7c3aed;
-  --accent3: #f59e0b;
-  --green: #10d080;
-  --red: #f43f5e;
-  --orange: #fb923c;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
-.wrap { position: relative; z-index: 1; max-width: 1060px; margin: 0 auto; padding: 36px 24px 80px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI71 — Coding Round Prep</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #080b10;
+            --surface: #0d1117;
+            --surface2: #131920;
+            --border: #1c2a38;
+            --border2: #243344;
+            --text: #d4e0ed;
+            --muted: #4d6478;
+            --accent: #00d4ff;
+            --accent2: #7c3aed;
+            --accent3: #f59e0b;
+            --green: #10d080;
+            --red: #f43f5e;
+            --orange: #fb923c;
+        }
 
-/* Header */
-.company-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: linear-gradient(135deg, #0d1f2e, #0a1520);
-  border: 1px solid #1c3a52; border-radius: 8px;
-  padding: 5px 13px; margin-bottom: 14px;
-  font-family: 'DM Mono', monospace; font-size: 0.68rem;
-  color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase;
-}
-.company-badge::before { content: '◆'; font-size: 0.45rem; }
-h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-  font-weight: 800; line-height: 1.1; color: #f0f8ff;
-  margin-bottom: 6px; letter-spacing: -0.02em;
-}
-h1 span { color: var(--accent); }
-.subtitle { font-size: 0.88rem; color: var(--muted); font-weight: 300; margin-bottom: 28px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Interview banner */
-.interview-banner {
-  background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(0,212,255,0.06));
-  border: 1px solid rgba(124,58,237,0.25); border-radius: 12px;
-  padding: 13px 18px; margin-bottom: 24px;
-  display: flex; align-items: center; gap: 12px; font-size: 0.83rem;
-}
-.interview-banner strong { color: #a78bfa; font-family: 'Syne', sans-serif; }
-.interview-banner span { color: var(--muted); }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-/* Countdown */
-.countdown-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 24px; }
-.cd-item {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 14px; text-align: center;
-}
-.cd-date { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800; color: #f0f8ff; }
-.cd-weekday { font-size: 0.68rem; color: var(--muted); margin-top: 2px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-.cd-left { font-size: 0.78rem; color: var(--accent); margin-top: 6px; font-weight: 500; }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-/* Progress */
-.progress-section {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px; padding: 18px 22px; margin-bottom: 30px;
-  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px;
-}
-.progress-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 9px; }
-.progress-track { height: 5px; background: var(--border2); border-radius: 999px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 999px; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); width: 0%; }
-.progress-pct { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--accent); line-height: 1; text-align: right; }
-.progress-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; text-align: right; }
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 36px 24px 80px;
+        }
 
-/* Phase */
-.phase { margin-bottom: 32px; }
-.phase-header {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 14px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-.phase-pill {
-  font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  padding: 3px 9px; border-radius: 4px;
-}
-.p1 { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.18); }
-.p2 { background: rgba(124,58,237,0.1); color: #a78bfa; border: 1px solid rgba(124,58,237,0.18); }
-.p3 { background: rgba(16,208,128,0.1); color: var(--green); border: 1px solid rgba(16,208,128,0.18); }
-.p4 { background: rgba(245,158,11,0.1); color: var(--accent3); border: 1px solid rgba(245,158,11,0.18); }
-.phase-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: #f0f8ff; }
-.phase-dates { font-size: 0.72rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-left: auto; }
+        /* Header */
+        .company-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0d1f2e, #0a1520);
+            border: 1px solid #1c3a52;
+            border-radius: 8px;
+            padding: 5px 13px;
+            margin-bottom: 14px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
-/* Day grid */
-.days-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 12px; }
+        .company-badge::before {
+            content: '◆';
+            font-size: 0.45rem;
+        }
 
-/* Day card */
-.day-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 13px; overflow: hidden; transition: border-color 0.2s, transform 0.15s;
-}
-.day-card:hover { border-color: var(--border2); transform: translateY(-1px); }
-.day-card.completed { border-color: rgba(16,208,128,0.28); }
-.day-card.completed .card-head { background: rgba(16,208,128,0.04); }
-.day-card.highlight { border-color: rgba(245,158,11,0.35); }
-.day-card.highlight .card-head { background: rgba(245,158,11,0.04); }
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: #f0f8ff;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
 
-.card-head {
-  padding: 13px 15px 11px; border-bottom: 1px solid var(--border);
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
-}
-.day-meta { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
-.day-name { font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700; color: #f0f8ff; line-height: 1.3; }
-.done-btn {
-  background: none; border: 1.5px solid var(--border2); border-radius: 6px;
-  width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--muted); font-size: 0.75rem; flex-shrink: 0;
-  transition: all 0.18s;
-}
-.done-btn:hover { border-color: var(--green); color: var(--green); }
-.day-card.completed .done-btn { background: rgba(16,208,128,0.12); border-color: var(--green); color: var(--green); }
+        h1 span {
+            color: var(--accent);
+        }
 
-.card-body { padding: 11px 15px 13px; }
+        .subtitle {
+            font-size: 0.88rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 28px;
+        }
 
-/* Tags */
-.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
-.tag {
-  font-size: 0.6rem; font-weight: 500; font-family: 'DM Mono', monospace;
-  padding: 2px 6px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em;
-}
-.t-dsa { background: rgba(0,212,255,0.08); color: #67c8d8; }
-.t-hot { background: rgba(244,63,94,0.1); color: #fb7185; }
-.t-py { background: rgba(245,158,11,0.08); color: #d4a44a; }
-.t-mock { background: rgba(124,58,237,0.1); color: #a78bfa; }
+        /* Interview banner */
+        .interview-banner {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(0, 212, 255, 0.06));
+            border: 1px solid rgba(124, 58, 237, 0.25);
+            border-radius: 12px;
+            padding: 13px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.83rem;
+        }
 
-/* Problems */
-.prob-list { list-style: none; }
-.prob-item {
-  display: flex; align-items: flex-start; gap: 8px;
-  padding: 5px 0; border-bottom: 1px solid rgba(28,42,56,0.5); cursor: pointer;
-}
-.prob-item:last-child { border-bottom: none; }
-.prob-item input[type="checkbox"] { flex-shrink: 0; width: 13px; height: 13px; margin-top: 3px; accent-color: var(--accent); cursor: pointer; }
-.prob-text { font-size: 0.78rem; color: #8fa4b8; line-height: 1.4; flex: 1; transition: color 0.15s; }
-.prob-text a { color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(100,148,180,0.35); transition: color 0.15s, border-color 0.15s; }
-.prob-text a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-.prob-item.done .prob-text { text-decoration: line-through; color: var(--muted); }
-.prob-item.done .prob-text a { color: var(--muted); border-bottom-color: transparent; }
+        .interview-banner strong {
+            color: #a78bfa;
+            font-family: 'Syne', sans-serif;
+        }
 
-.diff {
-  font-family: 'DM Mono', monospace; font-size: 0.56rem; font-weight: 500;
-  padding: 1px 5px; border-radius: 3px; flex-shrink: 0; margin-top: 3px;
-}
-.e { background: rgba(16,208,128,0.1); color: var(--green); }
-.m { background: rgba(245,158,11,0.1); color: var(--accent3); }
-.h { background: rgba(244,63,94,0.1); color: var(--red); }
+        .interview-banner span {
+            color: var(--muted);
+        }
 
-/* Note block */
-.note {
-  background: var(--surface2); border-radius: 7px; padding: 9px 11px;
-  margin-top: 9px; border-left: 2px solid var(--accent2);
-}
-.note-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
-.note-text { font-size: 0.75rem; color: #7a94aa; line-height: 1.5; }
-.note.hot { border-left-color: var(--red); }
-.note.amber { border-left-color: var(--accent3); }
+        /* Countdown */
+        .countdown-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
 
-/* Interview day */
-.interview-day-card {
-  background: linear-gradient(135deg, var(--surface), rgba(124,58,237,0.06));
-  border: 1px solid rgba(124,58,237,0.35); border-radius: 13px;
-  overflow: hidden;
-}
-.interview-day-card .card-head { background: rgba(124,58,237,0.07); border-bottom-color: rgba(124,58,237,0.2); }
-.interview-day-card .day-name { color: #c4b5fd; }
-.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+        .cd-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
 
-@media (max-width: 620px) {
-  .countdown-strip { grid-template-columns: 1fr; }
-  .days-grid { grid-template-columns: 1fr; }
-  .progress-section { grid-template-columns: 1fr; }
-  .progress-pct, .progress-sub { text-align: left; }
-  .checklist-grid { grid-template-columns: 1fr; }
-}
-</style>
+        .cd-date {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #f0f8ff;
+        }
+
+        .cd-weekday {
+            font-size: 0.68rem;
+            color: var(--muted);
+            margin-top: 2px;
+            font-family: 'DM Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .cd-left {
+            font-size: 0.78rem;
+            color: var(--accent);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* Progress */
+        .progress-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .progress-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 9px;
+        }
+
+        .progress-track {
+            height: 5px;
+            background: var(--border2);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            border-radius: 999px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        .progress-pct {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            text-align: right;
+        }
+
+        .progress-sub {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-top: 2px;
+            text-align: right;
+        }
+
+        /* Phase */
+        .phase {
+            margin-bottom: 32px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-pill {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            padding: 3px 9px;
+            border-radius: 4px;
+        }
+
+        .p1 {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 212, 255, 0.18);
+        }
+
+        .p2 {
+            background: rgba(124, 58, 237, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.18);
+        }
+
+        .p3 {
+            background: rgba(16, 208, 128, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(16, 208, 128, 0.18);
+        }
+
+        .p4 {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent3);
+            border: 1px solid rgba(245, 158, 11, 0.18);
+        }
+
+        .phase-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #f0f8ff;
+        }
+
+        .phase-dates {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: 'DM Mono', monospace;
+            margin-left: auto;
+        }
+
+        /* Day grid */
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 12px;
+        }
+
+        /* Day card */
+        .day-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            overflow: hidden;
+            transition: border-color 0.2s, transform 0.15s;
+        }
+
+        .day-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-1px);
+        }
+
+        .day-card.completed {
+            border-color: rgba(16, 208, 128, 0.28);
+        }
+
+        .day-card.completed .card-head {
+            background: rgba(16, 208, 128, 0.04);
+        }
+
+        .day-card.highlight {
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
+        .day-card.highlight .card-head {
+            background: rgba(245, 158, 11, 0.04);
+        }
+
+        .card-head {
+            padding: 13px 15px 11px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .day-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .day-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #f0f8ff;
+            line-height: 1.3;
+        }
+
+        .done-btn {
+            background: none;
+            border: 1.5px solid var(--border2);
+            border-radius: 6px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            transition: all 0.18s;
+        }
+
+        .done-btn:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .day-card.completed .done-btn {
+            background: rgba(16, 208, 128, 0.12);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .card-body {
+            padding: 11px 15px 13px;
+        }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 9px;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            font-weight: 500;
+            font-family: 'DM Mono', monospace;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .t-dsa {
+            background: rgba(0, 212, 255, 0.08);
+            color: #67c8d8;
+        }
+
+        .t-hot {
+            background: rgba(244, 63, 94, 0.1);
+            color: #fb7185;
+        }
+
+        .t-py {
+            background: rgba(245, 158, 11, 0.08);
+            color: #d4a44a;
+        }
+
+        .t-mock {
+            background: rgba(124, 58, 237, 0.1);
+            color: #a78bfa;
+        }
+
+        /* Problems */
+        .prob-list {
+            list-style: none;
+        }
+
+        .prob-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(28, 42, 56, 0.5);
+            cursor: pointer;
+        }
+
+        .prob-item:last-child {
+            border-bottom: none;
+        }
+
+        .prob-item input[type="checkbox"] {
+            flex-shrink: 0;
+            width: 13px;
+            height: 13px;
+            margin-top: 3px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .prob-text {
+            font-size: 0.78rem;
+            color: #8fa4b8;
+            line-height: 1.4;
+            flex: 1;
+            transition: color 0.15s;
+        }
+
+        .prob-text a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(100, 148, 180, 0.35);
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .prob-text a:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .prob-item.done .prob-text {
+            text-decoration: line-through;
+            color: var(--muted);
+        }
+
+        .prob-item.done .prob-text a {
+            color: var(--muted);
+            border-bottom-color: transparent;
+        }
+
+        .diff {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.56rem;
+            font-weight: 500;
+            padding: 1px 5px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .e {
+            background: rgba(16, 208, 128, 0.1);
+            color: var(--green);
+        }
+
+        .m {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent3);
+        }
+
+        .h {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--red);
+        }
+
+        /* Note block */
+        .note {
+            background: var(--surface2);
+            border-radius: 7px;
+            padding: 9px 11px;
+            margin-top: 9px;
+            border-left: 2px solid var(--accent2);
+        }
+
+        .note-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 3px;
+        }
+
+        .note-text {
+            font-size: 0.75rem;
+            color: #7a94aa;
+            line-height: 1.5;
+        }
+
+        .note.hot {
+            border-left-color: var(--red);
+        }
+
+        .note.amber {
+            border-left-color: var(--accent3);
+        }
+
+        /* Interview day */
+        .interview-day-card {
+            background: linear-gradient(135deg, var(--surface), rgba(124, 58, 237, 0.06));
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .interview-day-card .card-head {
+            background: rgba(124, 58, 237, 0.07);
+            border-bottom-color: rgba(124, 58, 237, 0.2);
+        }
+
+        .interview-day-card .day-name {
+            color: #c4b5fd;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 16px;
+        }
+
+        @media (max-width: 620px) {
+            .countdown-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .days-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-section {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-pct,
+            .progress-sub {
+                text-align: left;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="wrap">
+    <div class="wrap">
 
-  <div class="company-badge">AI71 · Abu Dhabi · Coding Round Only</div>
-  <h1>Day-by-Day <span>DSA Prep</span></h1>
-  <p class="subtitle">8 May → Interview confirmed 20 May, 11am BST &nbsp;·&nbsp; CoderPad &nbsp;·&nbsp; LeetCode Medium / Hard &nbsp;·&nbsp; Python</p>
+        <div class="company-badge">AI71 · Abu Dhabi · Coding Round Only</div>
+        <h1>Day-by-Day <span>DSA Prep</span></h1>
+        <p class="subtitle">8 May → Interview confirmed 20 May, 11am BST &nbsp;·&nbsp; CoderPad &nbsp;·&nbsp; LeetCode
+            Medium / Hard &nbsp;·&nbsp; Python</p>
 
-  <div class="interview-banner">
-    <span style="font-size:1.1rem">🎯</span>
-    <div>
-      <strong>CONFIRMED: Tue 20 May 2026 · 11:00am–12:00pm BST</strong>
-      <br><span>Interviewer: Dastan Iyembergen &nbsp;·&nbsp; Platform: CoderPad &nbsp;·&nbsp; No AI tools permitted</span>
+        <div class="interview-banner">
+            <span style="font-size:1.1rem">🎯</span>
+            <div>
+                <strong>CONFIRMED: Tue 20 May 2026 · 11:00am–12:00pm BST</strong>
+                <br><span>Interviewer: Dastan Iyembergen &nbsp;·&nbsp; Platform: CoderPad &nbsp;·&nbsp; No AI tools
+                    permitted</span>
+            </div>
+        </div>
+
+        <div class="countdown-strip">
+            <div class="cd-item" style="border-color: rgba(16,208,128,0.3);">
+                <div class="cd-date" style="color:var(--green)">20 May</div>
+                <div class="cd-weekday">Tuesday — Interview Day</div>
+                <div class="cd-left" id="d20">—</div>
+            </div>
+            <div class="cd-item">
+                <div class="cd-date">18 May</div>
+                <div class="cd-weekday">Sunday — Mock Day</div>
+                <div class="cd-left" id="d18">—</div>
+            </div>
+            <div class="cd-item">
+                <div class="cd-date">19 May</div>
+                <div class="cd-weekday">Monday — Light Review + Rest</div>
+                <div class="cd-left" id="d19">—</div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div>
+                <div class="progress-label">Problems completed</div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="pBar"></div>
+                </div>
+            </div>
+            <div>
+                <div class="progress-pct" id="pPct">0%</div>
+                <div class="progress-sub" id="pSub">0 / 0</div>
+            </div>
+        </div>
+
+        <!-- ── PHASE 1 ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p1">Phase 1</span>
+                <span class="phase-title">Arrays, Hashing & Sliding Window</span>
+                <span class="phase-dates">8 – 10 May</span>
+            </div>
+            <div class="days-grid">
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 1 · Thu 8 May</div>
+                            <div class="day-name">Arrays & Hash Maps</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-py">Python</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/two-sum/" target="_blank">Two
+                                        Sum</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/group-anagrams/" target="_blank">Group
+                                        Anagrams</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/top-k-frequent-elements/"
+                                        target="_blank">Top K Frequent Elements</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/product-of-array-except-self/"
+                                        target="_blank">Product of Array Except Self</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/longest-consecutive-sequence/"
+                                        target="_blank">Longest Consecutive Sequence</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/move-zeroes/" target="_blank">Move Zeroes ★
+                                        Yandex #7</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/summary-ranges/" target="_blank">Summary
+                                        Ranges ★ Yandex #2</a></span><span class="diff e">Easy</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">Python tip</div>
+                            <div class="note-text">Lead with <code>defaultdict</code>, <code>Counter</code>,
+                                <code>set()</code> — idiomatic Python scores well.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 2 · Fri 9 May</div>
+                            <div class="day-name">Two Pointers</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/valid-palindrome/" target="_blank">Valid
+                                        Palindrome</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/3sum/" target="_blank">3Sum</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/container-with-most-water/"
+                                        target="_blank">Container With Most Water</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/trapping-rain-water/"
+                                        target="_blank">Trapping Rain Water</a></span><span class="diff h">Hard</span>
+                            </li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">Pattern</div>
+                            <div class="note-text">Left + right pointer converging. Trace manually before coding — catch
+                                edge cases early.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 3 · Sat 10 May</div>
+                            <div class="day-name">Sliding Window</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">Yandex+Amazon</span>
+                        </div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+                                        target="_blank">Longest Substring Without Repeating Chars</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/permutation-in-string/"
+                                        target="_blank">Permutation in String</a></span><span class="diff m">Med</span>
+                            </li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/longest-repeating-character-replacement/"
+                                        target="_blank">Longest Repeating Character Replacement</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/minimum-window-substring/"
+                                        target="_blank">Minimum Window Substring</a></span><span
+                                    class="diff h">Hard</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/sliding-window-maximum/"
+                                        target="_blank">Sliding Window Maximum</a></span><span
+                                    class="diff h">Hard</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/subarray-sum-equals-k/"
+                                        target="_blank">Subarray Sum Equals K ★ Yandex+Amazon</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/max-consecutive-ones-iii/"
+                                        target="_blank">Max Consecutive Ones III ★ Yandex</a></span><span
+                                    class="diff m">Med</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">Core pattern</div>
+                            <div class="note-text">Expand right → shrink left when violated. Minimum Window is the
+                                hardest variant — give it a full hour if needed.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── PHASE 2 ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p1">Phase 2</span>
+                <span class="phase-title">Binary Search, Stacks & Linked Lists</span>
+                <span class="phase-dates">11 – 13 May</span>
+            </div>
+            <div class="days-grid">
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 4 · Sun 11 May</div>
+                            <div class="day-name">Binary Search</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/binary-search/" target="_blank">Binary
+                                        Search</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+                                        target="_blank">Find Min in Rotated Sorted Array</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/search-in-rotated-sorted-array/"
+                                        target="_blank">Search in Rotated Sorted Array</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank">Koko
+                                        Eating Bananas</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/time-based-key-value-store/"
+                                        target="_blank">Time Based Key-Value Store</a></span><span
+                                    class="diff m">Med</span></li>
+                        </ul>
+                        <div class="note amber">
+                            <div class="note-label">Why Time Based KV?</div>
+                            <div class="note-text">Binary search on timestamps = practically how Redis sorted sets work.
+                                Solid talking point for an AI backend role.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 5 · Mon 12 May</div>
+                            <div class="day-name">Stacks & Queues</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">Yandex+Amazon</span>
+                        </div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/valid-parentheses/" target="_blank">Valid
+                                        Parentheses</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/min-stack/" target="_blank">Min
+                                        Stack</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/daily-temperatures/" target="_blank">Daily
+                                        Temperatures</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/car-fleet/" target="_blank">Car
+                                        Fleet</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/largest-rectangle-in-histogram/"
+                                        target="_blank">Largest Rectangle in Histogram</a></span><span
+                                    class="diff h">Hard</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/merge-intervals/" target="_blank">Merge
+                                        Intervals ★ Yandex+Amazon</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/insert-delete-getrandom-o1/"
+                                        target="_blank">Insert Delete GetRandom O(1) ★ Yandex</a></span><span
+                                    class="diff m">Med</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">Weeknight tip</div>
+                            <div class="note-text">Skip Histogram if time is short — first 4 cover the pattern.
+                                Histogram is a confidence bonus.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 6 · Tue 13 May</div>
+                            <div class="day-name">Linked Lists + LRU Cache</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">AI Infra</span>
+                        </div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/reverse-linked-list/"
+                                        target="_blank">Reverse Linked List</a></span><span class="diff e">Easy</span>
+                            </li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/merge-two-sorted-lists/"
+                                        target="_blank">Merge Two Sorted Lists</a></span><span
+                                    class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/linked-list-cycle/" target="_blank">Linked
+                                        List Cycle</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/reorder-list/" target="_blank">Reorder
+                                        List</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/lru-cache/" target="_blank">LRU Cache
+                                        ★</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/copy-list-with-random-pointer/"
+                                        target="_blank">Copy List with Random Pointer ★ Amazon</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank">Merge
+                                        K Sorted Lists ★ Yandex+Amazon</a></span><span class="diff h">Hard</span></li>
+                        </ul>
+                        <div class="note hot">
+                            <div class="note-label">★ LRU Cache — priority</div>
+                            <div class="note-text">Doubly linked list + hash map. Can be asked as a design-in-code
+                                problem. Directly maps to caching LLM responses at AI71.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── PHASE 3 ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p2">Phase 3</span>
+                <span class="phase-title">Trees & Graphs</span>
+                <span class="phase-dates">14 – 16 May</span>
+            </div>
+            <div class="days-grid">
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 7 · Wed 14 May</div>
+                            <div class="day-name">Binary Trees — BFS + DFS</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/invert-binary-tree/" target="_blank">Invert
+                                        Binary Tree</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/binary-tree-level-order-traversal/"
+                                        target="_blank">Binary Tree Level Order Traversal</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/validate-binary-search-tree/"
+                                        target="_blank">Validate BST</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"
+                                        target="_blank">Lowest Common Ancestor of BST</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/binary-tree-right-side-view/"
+                                        target="_blank">Binary Tree Right Side View</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/"
+                                        target="_blank">Serialize and Deserialize Binary Tree</a></span><span
+                                    class="diff h">Hard</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 8 · Thu 15 May</div>
+                            <div class="day-name">Graphs — BFS, DFS, Topo Sort</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">Yandex #5</span>
+                        </div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/number-of-islands/" target="_blank">Number
+                                        of Islands</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/clone-graph/" target="_blank">Clone
+                                        Graph</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/pacific-atlantic-water-flow/"
+                                        target="_blank">Pacific Atlantic Water Flow</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/course-schedule/" target="_blank">Course
+                                        Schedule</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/word-ladder/" target="_blank">Word
+                                        Ladder</a></span><span class="diff h">Hard</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/generate-parentheses/"
+                                        target="_blank">Generate Parentheses ★ Yandex #5 — Backtracking</a></span><span
+                                    class="diff m">Med</span></li>
+                        </ul>
+                        <div class="note hot">
+                            <div class="note-label">Generate Parentheses — new pattern</div>
+                            <div class="note-text">Only backtracking problem in the Yandex top list. Rule: add '(' if
+                                open count &lt; n, add ')' if close count &lt; open count. Not in your plan before —
+                                give it time.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card highlight">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 9 · Fri 16 May</div>
+                            <div class="day-name">Tries — Autocomplete ★ Glassdoor signal</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">High Priority</span>
+                        </div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/implement-trie-prefix-tree/"
+                                        target="_blank">Implement Trie (Prefix Tree)</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/design-add-and-search-words-data-structure/"
+                                        target="_blank">Design Add and Search Words</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/search-suggestions-system/"
+                                        target="_blank">Search Suggestions System ← the autocomplete one</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/word-search-ii/" target="_blank">Word Search
+                                        II</a></span><span class="diff h">Hard</span></li>
+                        </ul>
+                        <div class="note hot">
+                            <div class="note-label">★ Glassdoor tip</div>
+                            <div class="note-text">AI71 reviewers explicitly mentioned autocomplete. Search Suggestions
+                                System is the direct LeetCode match. Do this one first, above all else today.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── PHASE 4 ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p2">Phase 4</span>
+                <span class="phase-title">Heaps & Dynamic Programming</span>
+                <span class="phase-dates">17 – 18 May</span>
+            </div>
+            <div class="days-grid">
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 10 · Sat 17 May</div>
+                            <div class="day-name">Heaps & Priority Queues</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-py">heapq</span><span
+                                class="tag t-hot">Yandex</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/kth-largest-element-in-an-array/"
+                                        target="_blank">Kth Largest Element in Array</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/k-closest-points-to-origin/"
+                                        target="_blank">K Closest Points to Origin</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/task-scheduler/" target="_blank">Task
+                                        Scheduler</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/find-median-from-data-stream/"
+                                        target="_blank">Find Median from Data Stream</a></span><span
+                                    class="diff h">Hard</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank">Merge
+                                        K Sorted Lists ★ Yandex+Amazon (if not done Day 6)</a></span><span
+                                    class="diff h">Hard</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">Python: heapq</div>
+                            <div class="note-text">Python is min-heap only. Negate values for max-heap.
+                                <code>heapq.nlargest(k, arr)</code> is your friend for top-K problems.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 11 · Sun 18 May</div>
+                            <div class="day-name">Dynamic Programming</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-dsa">DSA</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/climbing-stairs/" target="_blank">Climbing
+                                        Stairs</a></span><span class="diff e">Easy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/house-robber/" target="_blank">House
+                                        Robber</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/coin-change/" target="_blank">Coin
+                                        Change</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/word-break/" target="_blank">Word
+                                        Break</a></span><span class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/longest-palindromic-substring/"
+                                        target="_blank">Longest Palindromic Substring</a></span><span
+                                    class="diff m">Med</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a
+                                        href="https://leetcode.com/problems/edit-distance/" target="_blank">Edit
+                                        Distance</a></span><span class="diff m">Med</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">DP mindset</div>
+                            <div class="note-text">Start every DP problem by defining <code>dp[i]</code> in plain
+                                English before touching code. Saves you from going in circles.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── PHASE 5 — MOCK ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p3">Phase 5</span>
+                <span class="phase-title">Mock + Wind Down</span>
+                <span class="phase-dates">18 – 19 May</span>
+            </div>
+            <div class="days-grid">
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 12 · Sun 18 May</div>
+                            <div class="day-name">Full Mock — CoderPad Conditions</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-mock">Mock</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Go to
+                                    coderpad.io/sandbox — practice in the actual environment</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 random Medium —
+                                    solve in 25 min, talking out loud</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 random Medium —
+                                    solve in 25 min, talking out loud</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 Hard — attempt
+                                    under 35 min, no peeking</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Review any pattern you
+                                    struggled with this week</span></li>
+                        </ul>
+                        <div class="note amber">
+                            <div class="note-label">CoderPad tip</div>
+                            <div class="note-text">Use coderpad.io/sandbox with Python. No autocomplete. Talk
+                                constantly. Time yourself strictly. This is the actual interface you'll use on Tuesday.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="day-meta">Day 13 · Mon 19 May</div>
+                            <div class="day-name">Light Review + Rest</div>
+                        </div>
+                        <button class="done-btn" onclick="toggleDay(this)">✓</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags"><span class="tag t-mock">Wind Down</span></div>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Skim solutions for any
+                                    patterns that felt shaky this week</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Confirm Google Meet
+                                    link works: meet.google.com/hgc-zgjw-zvd</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Set alarm for 10:00am —
+                                    be in the Meet link by 10:55am</span></li>
+                            <li class="prob-item"><span class="prob-text"
+                                    style="color:var(--muted);font-style:italic">No new problems. Early night. You're
+                                    ready.</span></li>
+                        </ul>
+                        <div class="note">
+                            <div class="note-label">The night before</div>
+                            <div class="note-text">Grinding new problems tonight will not help — sleep will. Your brain
+                                needs consolidation time, not more input.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ── INTERVIEW DAY ── -->
+        <div class="phase">
+            <div class="phase-header">
+                <span class="phase-pill p4">Interview</span>
+                <span class="phase-title">Game Day — Tue 20 May</span>
+                <span class="phase-dates">11:00am – 12:00pm BST</span>
+            </div>
+
+            <div class="interview-day-card">
+                <div class="card-head">
+                    <div>
+                        <div class="day-meta">Tue 20 May 2026 · 11:00am BST · Interviewer: Dastan Iyembergen</div>
+                        <div class="day-name">AI71 Live Coding · CoderPad · 1 Hour</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="tags"><span class="tag t-mock">Live</span><span class="tag t-hot">CoderPad</span><span
+                            class="tag t-dsa">No AI tools</span></div>
+                    <div class="note" style="margin-bottom:12px; border-left-color: var(--green);">
+                        <div class="note-label">Google Meet link</div>
+                        <div class="note-text"><a href="https://meet.google.com/hgc-zgjw-zvd"
+                                style="color:var(--accent)">meet.google.com/hgc-zgjw-zvd</a> — join by 10:55am. Test mic
+                            + camera beforehand.</div>
+                    </div>
+                    <div class="checklist-grid">
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">9am: 1–2 easy warm-up
+                                    problems only — then stop</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Read the full problem
+                                    before writing a single line</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">State brute force
+                                    first, then optimise out loud</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Clarify: input size?
+                                    edge cases? sorted? duplicates?</span></li>
+                        </ul>
+                        <ul class="prob-list">
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">State time + space
+                                    complexity for every solution</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Talk constantly —
+                                    silence is your worst enemy</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Stuck? Say what you
+                                    know + ask for a nudge — they give hints</span></li>
+                            <li class="prob-item"><input type="checkbox"><span class="prob-text">Use Pythonic idioms —
+                                    show you're fluent, not just functional</span></li>
+                        </ul>
+                    </div>
+                    <div class="note" style="margin-top:12px; border-left-color:#a78bfa;">
+                        <div class="note-label">Your edge</div>
+                        <div class="note-text">You've shipped production FAISS search and async agent pipelines at
+                            JPMorgan. Most candidates have theory — you have working systems. If they ask about your
+                            background in Q&A, lean into that hard.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="countdown-strip">
-    <div class="cd-item" style="border-color: rgba(16,208,128,0.3);">
-      <div class="cd-date" style="color:var(--green)">20 May</div>
-      <div class="cd-weekday">Tuesday — Interview Day</div>
-      <div class="cd-left" id="d20">—</div>
-    </div>
-    <div class="cd-item">
-      <div class="cd-date">18 May</div>
-      <div class="cd-weekday">Sunday — Mock Day</div>
-      <div class="cd-left" id="d18">—</div>
-    </div>
-    <div class="cd-item">
-      <div class="cd-date">19 May</div>
-      <div class="cd-weekday">Monday — Light Review + Rest</div>
-      <div class="cd-left" id="d19">—</div>
-    </div>
-  </div>
+    <script>
+        // Countdown
+        function daysUntil(iso) {
+            const diff = Math.ceil((new Date(iso + 'T09:00:00') - new Date()) / 86400000);
+            if (diff < 0) return 'Passed';
+            if (diff === 0) return '🎯 Today!';
+            return diff + ' day' + (diff !== 1 ? 's' : '') + ' away';
+        }
+        document.getElementById('d20').textContent = daysUntil('2026-05-20');
+        document.getElementById('d18').textContent = daysUntil('2026-05-18');
+        document.getElementById('d19').textContent = daysUntil('2026-05-19');
 
-  <div class="progress-section">
-    <div>
-      <div class="progress-label">Problems completed</div>
-      <div class="progress-track"><div class="progress-fill" id="pBar"></div></div>
-    </div>
-    <div>
-      <div class="progress-pct" id="pPct">0%</div>
-      <div class="progress-sub" id="pSub">0 / 0</div>
-    </div>
-  </div>
+        // Toggle day done
+        function toggleDay(btn) { btn.closest('.day-card').classList.toggle('completed'); }
 
-  <!-- ── PHASE 1 ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p1">Phase 1</span>
-      <span class="phase-title">Arrays, Hashing & Sliding Window</span>
-      <span class="phase-dates">8 – 10 May</span>
-    </div>
-    <div class="days-grid">
+        // Progress
+        function updateProgress() {
+            const all = document.querySelectorAll('.prob-list input[type="checkbox"]');
+            const done = document.querySelectorAll('.prob-list input[type="checkbox"]:checked');
+            const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+            document.getElementById('pBar').style.width = pct + '%';
+            document.getElementById('pPct').textContent = pct + '%';
+            document.getElementById('pSub').textContent = done.length + ' / ' + all.length;
+        }
 
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 1 · Thu 8 May</div><div class="day-name">Arrays & Hash Maps</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-py">Python</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/two-sum/" target="_blank">Two Sum</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/group-anagrams/" target="_blank">Group Anagrams</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank">Top K Frequent Elements</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">Product of Array Except Self</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/longest-consecutive-sequence/" target="_blank">Longest Consecutive Sequence</a></span><span class="diff m">Med</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Python tip</div>
-            <div class="note-text">Lead with <code>defaultdict</code>, <code>Counter</code>, <code>set()</code> — idiomatic Python scores well.</div>
-          </div>
-        </div>
-      </div>
+        document.addEventListener('change', e => {
+            if (e.target.type === 'checkbox') {
+                const item = e.target.closest('.prob-item');
+                if (item) item.classList.toggle('done', e.target.checked);
+                updateProgress();
+            }
+        });
 
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 2 · Fri 9 May</div><div class="day-name">Two Pointers</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/valid-palindrome/" target="_blank">Valid Palindrome</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/3sum/" target="_blank">3Sum</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank">Container With Most Water</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank">Trapping Rain Water</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Pattern</div>
-            <div class="note-text">Left + right pointer converging. Trace manually before coding — catch edge cases early.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 3 · Sat 10 May</div><div class="day-name">Sliding Window</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank">Longest Substring Without Repeating Chars</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/permutation-in-string/" target="_blank">Permutation in String</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/longest-repeating-character-replacement/" target="_blank">Longest Repeating Character Replacement</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/minimum-window-substring/" target="_blank">Minimum Window Substring</a></span><span class="diff h">Hard</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank">Sliding Window Maximum</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Core pattern</div>
-            <div class="note-text">Expand right → shrink left when violated. Minimum Window is the hardest variant — give it a full hour if needed.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── PHASE 2 ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p1">Phase 2</span>
-      <span class="phase-title">Binary Search, Stacks & Linked Lists</span>
-      <span class="phase-dates">11 – 13 May</span>
-    </div>
-    <div class="days-grid">
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 4 · Sun 11 May</div><div class="day-name">Binary Search</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/binary-search/" target="_blank">Binary Search</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank">Find Min in Rotated Sorted Array</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank">Search in Rotated Sorted Array</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank">Koko Eating Bananas</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/time-based-key-value-store/" target="_blank">Time Based Key-Value Store</a></span><span class="diff m">Med</span></li>
-          </ul>
-          <div class="note amber">
-            <div class="note-label">Why Time Based KV?</div>
-            <div class="note-text">Binary search on timestamps = practically how Redis sorted sets work. Solid talking point for an AI backend role.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 5 · Mon 12 May</div><div class="day-name">Stacks & Queues</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/valid-parentheses/" target="_blank">Valid Parentheses</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/min-stack/" target="_blank">Min Stack</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/daily-temperatures/" target="_blank">Daily Temperatures</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/car-fleet/" target="_blank">Car Fleet</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank">Largest Rectangle in Histogram</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Weeknight tip</div>
-            <div class="note-text">Skip Histogram if time is short — first 4 cover the pattern. Histogram is a confidence bonus.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 6 · Tue 13 May</div><div class="day-name">Linked Lists + LRU Cache</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">AI Infra</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank">Reverse Linked List</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank">Merge Two Sorted Lists</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank">Linked List Cycle</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/reorder-list/" target="_blank">Reorder List</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/lru-cache/" target="_blank">LRU Cache ★</a></span><span class="diff m">Med</span></li>
-          </ul>
-          <div class="note hot">
-            <div class="note-label">★ LRU Cache — priority</div>
-            <div class="note-text">Doubly linked list + hash map. Can be asked as a design-in-code problem. Directly maps to caching LLM responses at AI71.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── PHASE 3 ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p2">Phase 3</span>
-      <span class="phase-title">Trees & Graphs</span>
-      <span class="phase-dates">14 – 16 May</span>
-    </div>
-    <div class="days-grid">
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 7 · Wed 14 May</div><div class="day-name">Binary Trees — BFS + DFS</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank">Invert Binary Tree</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank">Binary Tree Level Order Traversal</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank">Validate BST</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/" target="_blank">Lowest Common Ancestor of BST</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank">Binary Tree Right Side View</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/" target="_blank">Serialize and Deserialize Binary Tree</a></span><span class="diff h">Hard</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 8 · Thu 15 May</div><div class="day-name">Graphs — BFS, DFS, Topo Sort</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/number-of-islands/" target="_blank">Number of Islands</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/clone-graph/" target="_blank">Clone Graph</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank">Pacific Atlantic Water Flow</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/course-schedule/" target="_blank">Course Schedule</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/word-ladder/" target="_blank">Word Ladder</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Pattern focus</div>
-            <div class="note-text">BFS for shortest path, DFS for connected components, Topo Sort for dependency ordering. Know all three cold.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card highlight">
-        <div class="card-head">
-          <div><div class="day-meta">Day 9 · Fri 16 May</div><div class="day-name">Tries — Autocomplete ★ Glassdoor signal</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-hot">High Priority</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank">Implement Trie (Prefix Tree)</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/design-add-and-search-words-data-structure/" target="_blank">Design Add and Search Words</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/search-suggestions-system/" target="_blank">Search Suggestions System ← the autocomplete one</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/word-search-ii/" target="_blank">Word Search II</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note hot">
-            <div class="note-label">★ Glassdoor tip</div>
-            <div class="note-text">AI71 reviewers explicitly mentioned autocomplete. Search Suggestions System is the direct LeetCode match. Do this one first, above all else today.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── PHASE 4 ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p2">Phase 4</span>
-      <span class="phase-title">Heaps & Dynamic Programming</span>
-      <span class="phase-dates">17 – 18 May</span>
-    </div>
-    <div class="days-grid">
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 10 · Sat 17 May</div><div class="day-name">Heaps & Priority Queues</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span><span class="tag t-py">heapq</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank">Kth Largest Element in Array</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/k-closest-points-to-origin/" target="_blank">K Closest Points to Origin</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/task-scheduler/" target="_blank">Task Scheduler</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank">Find Median from Data Stream</a></span><span class="diff h">Hard</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">Python: heapq</div>
-            <div class="note-text">Python is min-heap only. Negate values for max-heap. <code>heapq.nlargest(k, arr)</code> is your friend for top-K problems.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 11 · Sun 18 May</div><div class="day-name">Dynamic Programming</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-dsa">DSA</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/climbing-stairs/" target="_blank">Climbing Stairs</a></span><span class="diff e">Easy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/house-robber/" target="_blank">House Robber</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/coin-change/" target="_blank">Coin Change</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/word-break/" target="_blank">Word Break</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank">Longest Palindromic Substring</a></span><span class="diff m">Med</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text"><a href="https://leetcode.com/problems/edit-distance/" target="_blank">Edit Distance</a></span><span class="diff m">Med</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">DP mindset</div>
-            <div class="note-text">Start every DP problem by defining <code>dp[i]</code> in plain English before touching code. Saves you from going in circles.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── PHASE 5 — MOCK ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p3">Phase 5</span>
-      <span class="phase-title">Mock + Wind Down</span>
-      <span class="phase-dates">18 – 19 May</span>
-    </div>
-    <div class="days-grid">
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 12 · Sun 18 May</div><div class="day-name">Full Mock — CoderPad Conditions</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-mock">Mock</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Go to coderpad.io/sandbox — practice in the actual environment</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 random Medium — solve in 25 min, talking out loud</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 random Medium — solve in 25 min, talking out loud</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Pick 1 Hard — attempt under 35 min, no peeking</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Review any pattern you struggled with this week</span></li>
-          </ul>
-          <div class="note amber">
-            <div class="note-label">CoderPad tip</div>
-            <div class="note-text">Use coderpad.io/sandbox with Python. No autocomplete. Talk constantly. Time yourself strictly. This is the actual interface you'll use on Tuesday.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <div class="card-head">
-          <div><div class="day-meta">Day 13 · Mon 19 May</div><div class="day-name">Light Review + Rest</div></div>
-          <button class="done-btn" onclick="toggleDay(this)">✓</button>
-        </div>
-        <div class="card-body">
-          <div class="tags"><span class="tag t-mock">Wind Down</span></div>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Skim solutions for any patterns that felt shaky this week</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Confirm Google Meet link works: meet.google.com/hgc-zgjw-zvd</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Set alarm for 10:00am — be in the Meet link by 10:55am</span></li>
-            <li class="prob-item"><span class="prob-text" style="color:var(--muted);font-style:italic">No new problems. Early night. You're ready.</span></li>
-          </ul>
-          <div class="note">
-            <div class="note-label">The night before</div>
-            <div class="note-text">Grinding new problems tonight will not help — sleep will. Your brain needs consolidation time, not more input.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── INTERVIEW DAY ── -->
-  <div class="phase">
-    <div class="phase-header">
-      <span class="phase-pill p4">Interview</span>
-      <span class="phase-title">Game Day — Tue 20 May</span>
-      <span class="phase-dates">11:00am – 12:00pm BST</span>
-    </div>
-
-    <div class="interview-day-card">
-      <div class="card-head">
-        <div><div class="day-meta">Tue 20 May 2026 · 11:00am BST · Interviewer: Dastan Iyembergen</div><div class="day-name">AI71 Live Coding · CoderPad · 1 Hour</div></div>
-      </div>
-      <div class="card-body">
-        <div class="tags"><span class="tag t-mock">Live</span><span class="tag t-hot">CoderPad</span><span class="tag t-dsa">No AI tools</span></div>
-        <div class="note" style="margin-bottom:12px; border-left-color: var(--green);">
-          <div class="note-label">Google Meet link</div>
-          <div class="note-text"><a href="https://meet.google.com/hgc-zgjw-zvd" style="color:var(--accent)">meet.google.com/hgc-zgjw-zvd</a> — join by 10:55am. Test mic + camera beforehand.</div>
-        </div>
-        <div class="checklist-grid">
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">9am: 1–2 easy warm-up problems only — then stop</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Read the full problem before writing a single line</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">State brute force first, then optimise out loud</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Clarify: input size? edge cases? sorted? duplicates?</span></li>
-          </ul>
-          <ul class="prob-list">
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">State time + space complexity for every solution</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Talk constantly — silence is your worst enemy</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Stuck? Say what you know + ask for a nudge — they give hints</span></li>
-            <li class="prob-item"><input type="checkbox"><span class="prob-text">Use Pythonic idioms — show you're fluent, not just functional</span></li>
-          </ul>
-        </div>
-        <div class="note" style="margin-top:12px; border-left-color:#a78bfa;">
-          <div class="note-label">Your edge</div>
-          <div class="note-text">You've shipped production FAISS search and async agent pipelines at JPMorgan. Most candidates have theory — you have working systems. If they ask about your background in Q&A, lean into that hard.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-  // Countdown
-  function daysUntil(iso) {
-    const diff = Math.ceil((new Date(iso+'T09:00:00') - new Date()) / 86400000);
-    if (diff < 0) return 'Passed';
-    if (diff === 0) return '🎯 Today!';
-    return diff + ' day' + (diff !== 1 ? 's' : '') + ' away';
-  }
-  document.getElementById('d20').textContent = daysUntil('2026-05-20');
-  document.getElementById('d18').textContent = daysUntil('2026-05-18');
-  document.getElementById('d19').textContent = daysUntil('2026-05-19');
-
-  // Toggle day done
-  function toggleDay(btn) { btn.closest('.day-card').classList.toggle('completed'); }
-
-  // Progress
-  function updateProgress() {
-    const all = document.querySelectorAll('.prob-list input[type="checkbox"]');
-    const done = document.querySelectorAll('.prob-list input[type="checkbox"]:checked');
-    const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
-    document.getElementById('pBar').style.width = pct + '%';
-    document.getElementById('pPct').textContent = pct + '%';
-    document.getElementById('pSub').textContent = done.length + ' / ' + all.length;
-  }
-
-  document.addEventListener('change', e => {
-    if (e.target.type === 'checkbox') {
-      const item = e.target.closest('.prob-item');
-      if (item) item.classList.toggle('done', e.target.checked);
-      updateProgress();
-    }
-  });
-
-  updateProgress();
-</script>
+        updateProgress();
+    </script>
 </body>
+
 </html>
